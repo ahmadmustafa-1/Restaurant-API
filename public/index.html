@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestia API | Interactive Developer Explorer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'><path d='M10 2c-4.42 0-8 3.58-8 8s3.58 8 8 8c1.1 0 2.15-.22 3.11-.62-2.18-1.07-3.61-3.35-3.61-5.88 0-2.53 1.43-4.81 3.61-5.88C12.15 2.22 11.1 2 10 2z'/><path d='M17 9l1.5 3.5L22 14l-3.5 1.5L17 19l-1.5-3.5L12 14l3.5-1.5L17 9z'/><path d='M19 2l.75 1.75L21.5 4l-1.75.75L19 6.5l-.75-1.75L16.5 4l1.75-.75L19 2z'/></svg>">
+</head>
+<body>
+    <!-- Background glow design -->
+    <div class="glow glow-purple"></div>
+    <div class="glow glow-gold"></div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <svg viewBox="0 0 24 24" class="brand-icon">
+                    <path d="M10 2c-4.42 0-8 3.58-8 8s3.58 8 8 8c1.1 0 2.15-.22 3.11-.62-2.18-1.07-3.61-3.35-3.61-5.88 0-2.53 1.43-4.81 3.61-5.88C12.15 2.22 11.1 2 10 2z"/>
+                    <path d="M17 9l1.5 3.5L22 14l-3.5 1.5L17 19l-1.5-3.5L12 14l3.5-1.5L17 9z"/>
+                    <path d="M19 2l.75 1.75L21.5 4l-1.75.75L19 6.5l-.75-1.75L16.5 4l1.75-.75L19 2z"/>
+                </svg>
+                <span>Celestia API</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#welcome" class="nav-link active">Introduction</a>
+                <a href="#menu-group" class="nav-link">Menu API</a>
+                <a href="#reservations-group" class="nav-link">Reservations API</a>
+                <a href="#checkout-group" class="nav-link">Checkout API</a>
+                <a href="#stats-group" class="nav-link">Dashboard Stats</a>
+            </nav>
+
+            <div class="server-status">
+                <span class="status-dot online"></span>
+                <span>API Status: <strong>Online</strong></span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Celestia Backend API Explorer</h1>
+                <p>Verify backend database structures and test API endpoints in real-time.</p>
+            </header>
+
+            <div class="grid-content">
+                <!-- Left: Endpoint Documentation -->
+                <div class="docs-section">
+                    
+                    <!-- 1. Introduction Card -->
+                    <div class="glass-card doc-card active-card" id="welcome">
+                        <h2>API Developer Sandbox</h2>
+                        <p>Welcome to the developer playground for Celestia Restaurant API server. All requests are routed through simulated latency to verify loading states on the client frontend.</p>
+                        <div class="base-url-block">
+                          <span>Base URL:</span>
+                          <code>http://localhost:3000</code>
+                        </div>
+                    </div>
+
+                    <!-- 2. Menu Endpoints -->
+                    <div class="glass-card doc-card" id="menu-group">
+                        <h3>Menu Catalog Endpoints</h3>
+                        <div class="endpoint-block">
+                            <span class="method-badge get">GET</span>
+                            <code>/api/menu</code>
+                            <p class="endpoint-desc">Retrieves the complete list of dishes. Supports optional filters: <code>?category=burgers</code> or search keywords: <code>?search=truffle</code>.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/menu" data-method="GET">Test Endpoint</button>
+                        </div>
+                        <div class="endpoint-block">
+                            <span class="method-badge get">GET</span>
+                            <code>/api/menu/:id</code>
+                            <p class="endpoint-desc">Fetches details of a single dish, incrementing its popularity counters.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/menu/1" data-method="GET">Test ID: 1</button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Reservations Endpoints -->
+                    <div class="glass-card doc-card" id="reservations-group">
+                        <h3>Reservations Data Persistence</h3>
+                        <div class="endpoint-block">
+                            <span class="method-badge get">GET</span>
+                            <code>/api/reservations</code>
+                            <p class="endpoint-desc">Fetch all submitted customer reservation requests. Filter by status: <code>?status=Pending</code> or search query string.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/reservations" data-method="GET">Test Fetch</button>
+                        </div>
+                        <div class="endpoint-block">
+                            <span class="method-badge post">POST</span>
+                            <code>/api/reservations</code>
+                            <p class="endpoint-desc">Submits a new table reservation inquiry record into JSON DB.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/reservations" data-method="POST" data-payload='{"name":"Ahmad Mustafa","email":"ahmad@gmail.com","subject":"Family Dining Table","message":"I need to book a 4-person table for this Sunday at 7 PM."}'>Test Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- 4. Checkout Endpoints -->
+                    <div class="glass-card doc-card" id="checkout-group">
+                        <h3>Order Checkout Simulation</h3>
+                        <div class="endpoint-block">
+                            <span class="method-badge post">POST</span>
+                            <code>/api/checkout</code>
+                            <p class="endpoint-desc">Places a new combined order. Re-validates prices server-side to prevent fraud.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/checkout" data-method="POST" data-payload='{"customer":{"name":"Ali Khan","email":"ali@gmail.com","phone":"+923211234567"},"cart":[{"id":1,"quantity":2},{"id":8,"quantity":1}],"payment":"Credit Card","billing":"Model Town, Lahore"}'>Place Test Order</button>
+                        </div>
+                        <div class="endpoint-block">
+                            <span class="method-badge get">GET</span>
+                            <code>/api/orders</code>
+                            <p class="endpoint-desc">Fetch details of all completed checkout transactions.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/orders" data-method="GET">Test Fetch Orders</button>
+                        </div>
+                    </div>
+
+                    <!-- 5. Dashboard Stats -->
+                    <div class="glass-card doc-card" id="stats-group">
+                        <h3>Dashboard Analytics Stats</h3>
+                        <div class="endpoint-block">
+                            <span class="method-badge get">GET</span>
+                            <code>/api/stats</code>
+                            <p class="endpoint-desc">Fetch aggregated stats values to populate dashboard statistics cards.</p>
+                            <button class="btn btn-primary test-btn" data-url="/api/stats" data-method="GET">Get Live Stats</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right: Console Output Interceptor -->
+                <div class="console-section">
+                    <div class="glass-card console-card">
+                        <div class="console-header">
+                            <div class="window-buttons">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="console-title">Live Response Console</span>
+                            <button class="clear-btn" id="clear-console-btn">Clear Logs</button>
+                        </div>
+                        <div class="console-body" id="console-output">
+                            <p class="console-welcome-text">// Logs of test requests will output here dynamically.<br>// Click any "Test Endpoint" button on the left panel to execute.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Script Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const consoleOutput = document.getElementById('console-output');
+            const clearBtn = document.getElementById('clear-console-btn');
+            const testButtons = document.querySelectorAll('.test-btn');
+            
+            // Clear console handler
+            clearBtn.addEventListener('click', () => {
+                consoleOutput.innerHTML = '<p class="console-welcome-text">// Console logs cleared. Waiting for actions...</p>';
+            });
+
+            // Endpoint testing handler
+            testButtons.forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const url = btn.dataset.url;
+                    const method = btn.dataset.method;
+                    const payload = btn.dataset.payload;
+
+                    logToConsole(`&gt;&gt; Running ${method} ${url}...`);
+
+                    try {
+                        const options = {
+                            method: method,
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        };
+
+                        if (method === 'POST' && payload) {
+                            options.body = payload;
+                        }
+
+                        const response = await fetch(url, options);
+                        const status = response.status;
+                        const data = await response.json();
+
+                        logToConsole(`&lt;&lt; Server Response Status: ${status}`);
+                        logToConsole(JSON.stringify(data, null, 2), 'response');
+
+                    } catch (error) {
+                        logToConsole(`!! Network Connection Error: ${error.message}`, 'error');
+                    }
+                });
+            });
+
+            function logToConsole(message, type = 'info') {
+                const log = document.createElement('pre');
+                log.className = `log-entry log-${type}`;
+                log.innerHTML = message;
+                
+                // Remove welcome text on first log
+                const welcome = consoleOutput.querySelector('.console-welcome-text');
+                if (welcome) welcome.remove();
+
+                consoleOutput.appendChild(log);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

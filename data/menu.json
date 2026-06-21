@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "Celestia Signature Burger",
+    "category": "burgers",
+    "price": 1450,
+    "image": "assets/images/menu-burger-1.jpg",
+    "description": "Hand-pressed A5 Wagyu beef patty, house-made black truffle aioli, aged English cheddar, wild baby arugula, toasted brioche bun.",
+    "rating": 5,
+    "badge": "Chef Special",
+    "views": 1
+  },
+  {
+    "id": 2,
+    "name": "Imperial Forest Burger",
+    "category": "burgers",
+    "price": 1650,
+    "image": "assets/images/menu-burger-2.jpg",
+    "description": "Grass-fed double beef patty, sautéed balsamic wild mushrooms, rich French brie cheese, caramelized red onion marmalade.",
+    "rating": 5,
+    "badge": "Luxury Option",
+    "views": 0
+  },
+  {
+    "id": 3,
+    "name": "Truffle & Mushroom Pizza",
+    "category": "pizza",
+    "price": 1550,
+    "image": "assets/images/menu-pizza-1.jpg",
+    "description": "Stone-baked sourdough crust topped with white truffle oil, roasted chanterelle mushrooms, creamy buffalo mozzarella, fresh sweet basil.",
+    "rating": 5,
+    "badge": "Best Seller",
+    "views": 0
+  },
+  {
+    "id": 4,
+    "name": "Prosciutto Crudo Pizza",
+    "category": "pizza",
+    "price": 1750,
+    "image": "assets/images/menu-pizza-2.jpg",
+    "description": "Crushed San Marzano tomatoes, fresh mozzarella, cured Prosciutto di Parma, dressed baby arugula, shaved Parmigiano-Reggiano, olive oil.",
+    "rating": 4,
+    "badge": "Authentic",
+    "views": 0
+  },
+  {
+    "id": 5,
+    "name": "Smoked Iberico Pork Ribs",
+    "category": "bbq",
+    "price": 2250,
+    "image": "assets/images/menu-bbq-1.jpg",
+    "description": "Slow-smoked Spanish Iberico pork ribs glazed with artisanal lavender-honey bourbon BBQ sauce, served with crisp vinegar slaw.",
+    "rating": 5,
+    "badge": "Smokey Delight",
+    "views": 0
+  },
+  {
+    "id": 6,
+    "name": "14-Hour Cherrywood Brisket",
+    "category": "bbq",
+    "price": 2350,
+    "image": "assets/images/menu-bbq-2.jpg",
+    "description": "Prime beef brisket smoked over local cherrywood logs for 14 hours. Served thick-sliced with house mustard dressing and pickled gherkins.",
+    "rating": 5,
+    "badge": "Signature Pit",
+    "views": 0
+  },
+  {
+    "id": 7,
+    "name": "Maine Lobster Brioche Roll",
+    "category": "fast food",
+    "price": 2400,
+    "image": "assets/images/menu-fast-1.jpg",
+    "description": "Chilled fresh Maine lobster claw and tail meat lightly tossed in drawn chive-lemon butter, served inside a toasted split-top brioche bun.",
+    "rating": 5,
+    "badge": "Ocean Fresh",
+    "views": 0
+  },
+  {
+    "id": 8,
+    "name": "Parmesan White Truffle Fries",
+    "category": "fast food",
+    "price": 750,
+    "image": "assets/images/menu-fast-2.jpg",
+    "description": "Double-fried Idaho russet potatoes tossed in premium Italian white truffle oil, grated Parmigiano-Reggiano, chopped flat-leaf parsley, garlic aioli.",
+    "rating": 4,
+    "badge": "Favorite Side",
+    "views": 0
+  },
+  {
+    "id": 9,
+    "name": "Saffron Golden Hour Nectar",
+    "category": "drinks",
+    "price": 550,
+    "image": "assets/images/menu-drink-1.jpg",
+    "description": "Organic saffron thread infusion, sparkling mineral water, cold-pressed lime juice, wild honey ginger syrup, edible 24k gold leaf flakes.",
+    "rating": 5,
+    "badge": "Non-Alcoholic",
+    "views": 0
+  },
+  {
+    "id": 10,
+    "name": "Cucumber Elderflower Tonic",
+    "category": "drinks",
+    "price": 450,
+    "image": "assets/images/menu-drink-2.jpg",
+    "description": "Muddled English hothouse cucumber, fresh sweet basil leaves, organic lime juice, wild elderflower syrup, sparkling tonic water.",
+    "rating": 4,
+    "badge": "Refreshing",
+    "views": 0
+  },
+  {
+    "id": 11,
+    "name": "Saffron Deconstructed Tiramisu",
+    "category": "desserts",
+    "price": 850,
+    "image": "assets/images/menu-dessert-1.jpg",
+    "description": "Espresso-soaked artisanal ladyfingers layered with saffron-whipped Italian mascarpone cream cheese, dusted with organic dark cocoa powder.",
+    "rating": 5,
+    "badge": "Chef Original",
+    "views": 0
+  },
+  {
+    "id": 12,
+    "name": "Velvet Chocolate Lava Melt",
+    "category": "desserts",
+    "price": 750,
+    "image": "assets/images/menu-dessert-2.jpg",
+    "description": "Warm single-origin Belgian dark chocolate cake with a molten liquid core, served with organic fresh raspberries and Madagascar vanilla gelato.",
+    "rating": 5,
+    "badge": "Warm Comfort",
+    "views": 0
+  }
+]
