@@ -130,7 +130,8 @@ app.post('/api/reservations', (req, res) => {
     email: email.trim(),
     subject: subject.trim(),
     message: message.trim(),
-    date: new Date().toLocaleDateString('en-US', {
+    date: new Date().toLocaleString('en-US', {
+      timeZone: 'Asia/Karachi',
       year: 'numeric',
       month: 'short',
       day: 'numeric',
