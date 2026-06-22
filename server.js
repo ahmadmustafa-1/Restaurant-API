@@ -205,7 +205,7 @@ app.post('/api/checkout', (req, res) => {
 
   // Re-calculate pricing server-side to prevent client price spoofing
   for (const cartItem of cart) {
-    const dish = menu.find(item => item.id === cartItem.id);
+    const dish = menu.find(item => Number(item.id) === Number(cartItem.id));
     if (!dish) {
       return res.status(404).json({ error: 'Dish Not Found', message: `Dish with ID ${cartItem.id} was not found.` });
     }
