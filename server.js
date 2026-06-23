@@ -39,6 +39,7 @@ mongoose.connect(mongoUrl)
 // MONGOOSE SCHEMAS & MODELS
 // ==========================================
 
+// 1. Menu Schema
 const MenuSchema = new mongoose.Schema({
   id: { type: Number, required: true, unique: true },
   name: { type: String, required: true },
@@ -52,6 +53,7 @@ const MenuSchema = new mongoose.Schema({
 });
 const Menu = mongoose.model('Menu', MenuSchema);
 
+// 2. Reservation Schema
 const ReservationSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
@@ -63,6 +65,7 @@ const ReservationSchema = new mongoose.Schema({
 });
 const Reservation = mongoose.model('Reservation', ReservationSchema);
 
+// 3. Order Schema
 const OrderSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   customer: {
@@ -87,6 +90,13 @@ const OrderSchema = new mongoose.Schema({
   date: { type: String, required: true }
 });
 const Order = mongoose.model('Order', OrderSchema);
+
+// 4. Admin Account Schema
+const AdminSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
+const Admin = mongoose.model('Admin', AdminSchema);
 
 // Auto-seed function to populate menu items from local JSON if empty
 async function seedMenuIfNeeded() {
@@ -266,6 +276,17 @@ app.delete('/api/reservations/:id', async (req, res) => {
   }
 });
 
+// DELETE /api/reservations - Clear ALL reservation records
+app.delete('/api/reservations', async (req, res) => {
+  try {
+    await Reservation.deleteMany({});
+    res.status(200).json({ success: true, message: 'All reservations deleted successfully.' });
+  } catch (error) {
+    console.error("Error deleting all reservations from MongoDB:", error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+});
+
 // ==========================================
 // 3. CHECKOUT / ORDERS ENDPOINTS
 // ==========================================
@@ -338,8 +359,87 @@ app.get('/api/orders', async (req, res) => {
   }
 });
 
+// DELETE /api/orders - Clear ALL order records
+app.delete('/api/orders', async (req, res) => {
+  try {
+    await Order.deleteMany({});
+    res.status(200).json({ success: true, message: 'All orders deleted successfully.' });
+  } catch (error) {
+    console.error("Error deleting all orders from MongoDB:", error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+});
+
 // ==========================================
-// 4. ADMIN STATS ENDPOINT
+// 4. ADMIN REGISTRATION & AUTHENTICATION ENDPOINTS
+// ==========================================
+
+// POST /api/admin/register - Register a custom admin account in MongoDB
+app.post('/api/admin/register', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Bad Request', message: 'Missing username or password.' });
+  }
+  try {
+    // Check if username is reserved
+    if (username.toLowerCase() === 'admin') {
+      return res.status(400).json({ error: 'Bad Request', message: "Username 'admin' is reserved." });
+    }
+    // Check if username already exists
+    const existing = await Admin.findOne({ username: { $regex: new RegExp('^' + username + '$', 'i') } });
+    if (existing) {
+      return res.status(400).json({ error: 'Conflict', message: 'Username already exists.' });
+    }
+    const newAdmin = new Admin({
+      username: username.trim(),
+      password: password
+    });
+    await newAdmin.save();
+    res.status(201).json({ success: true, message: 'Admin account registered successfully.' });
+  } catch (error) {
+    console.error("Error registering admin account in MongoDB:", error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+});
+
+// POST /api/admin/login - Authenticate credentials against MongoDB / superadmin
+app.post('/api/admin/login', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Bad Request', message: 'Missing username or password.' });
+  }
+  try {
+    // Check built-in super admin
+    if (username.toLowerCase() === 'admin' && password === 'admincelestia') {
+      return res.status(200).json({ success: true, token: 'super-admin-token' });
+    }
+    // Check MongoDB custom accounts
+    const match = await Admin.findOne({ 
+      username: { $regex: new RegExp('^' + username + '$', 'i') },
+      password: password
+    });
+    if (match) {
+      return res.status(200).json({ success: true, token: 'custom-admin-token' });
+    }
+    res.status(401).json({ error: 'Unauthorized', message: 'Invalid username or password.' });
+  } catch (error) {
+    console.error("Error logging in admin account in MongoDB:", error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+});
+
+// GET /api/admin/accounts - Get list of custom admin usernames (for duplicate checks in frontend if needed)
+app.get('/api/admin/accounts', async (req, res) => {
+  try {
+    const list = await Admin.find({}, 'username');
+    res.status(200).json(list);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+});
+
+// ==========================================
+// 5. ADMIN STATS ENDPOINT
 // ==========================================
 
 // GET /api/stats - Dashboard stats summary
